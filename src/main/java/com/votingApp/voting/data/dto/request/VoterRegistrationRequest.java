@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class VoterRegistrationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userId;
+    private long userId;
     private String party;
     private String name;
     private long voterId;

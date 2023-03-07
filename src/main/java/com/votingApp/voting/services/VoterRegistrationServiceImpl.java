@@ -17,12 +17,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class VoterRegistrationServiceImpl implements VoterRegistrationService{
     private final VoterRegistrationRepository voterRegistrationRepository;
-//    @Autowired
-//   private  VoterRegistration voterRegistration;
+
     @Override
     public VoterRegistration voterRegistration(VoterRegistrationRequest voterRegistrationRequest) throws GlobalException {
         VoterRegistration voterRegistration = new VoterRegistration();
-        voterRegistration.setUserId(Long.valueOf(voterRegistrationRequest.getUserId()));
+        voterRegistration.setUserId(voterRegistrationRequest.getUserId());
         voterRegistration.setName(voterRegistrationRequest.getName());
         voterRegistration.setVoterId(voterRegistrationRequest.getVoterId());
         voterRegistration.setCandidateName(voterRegistrationRequest.getCandidateName());
@@ -43,4 +42,25 @@ public class VoterRegistrationServiceImpl implements VoterRegistrationService{
        voterRegistrationRepository.save(voterRegistration);
        voterRegistrationRepository.count();
     }
+
+    @Override
+    public VoterRegistration findVotesById(Long id) {
+        return voterRegistrationRepository.findById(id).orElseThrow(() -> new IllegalStateException("Votes not found"));
+    }
+
+    @Override
+    public long count() {
+        return voterRegistrationRepository.count();
+    }
+
+    @Override
+    public void deleteVotesById(Long id) {
+        voterRegistrationRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllVotes() {
+        voterRegistrationRepository.deleteAll();
+    }
+
 }

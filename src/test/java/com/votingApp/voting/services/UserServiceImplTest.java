@@ -17,21 +17,19 @@ class UserServiceImplTest {
     private UserService userService;
 
     UserRequest userRequest1;
-//    private UserRequest userRequest;
 
     @BeforeEach
     public void setUp() {
-        userRequest1 = new UserRequest(
-                1L,
-                "Newton",
-                "Norton",
-                "Cunningham",
-                "eu123@gmail.com",
-                25,
-                "New York State",
-                MALE,
-                638399935794087L
-        );
+        userRequest1 = new UserRequest();
+        userRequest1.setId(1);
+        userRequest1.setFirstName("Ernest");
+        userRequest1.setLastName("Emmanuel");
+        userRequest1.setMiddleName("Utibe");
+        userRequest1.setEmail("eksi123@gmail.com");
+        userRequest1.setGender(MALE);
+        userRequest1.setState("Adamawa");
+        userRequest1.setAge(12);
+        userRequest1.setNationalIdentificationNumber(75947834738583553L);
 
     }
 
@@ -44,13 +42,13 @@ class UserServiceImplTest {
     void testThatUserCanBeFoundById(){
         userService.registerUser(userRequest1);
 
-      assertEquals("Norton", userService.findUserById(1L).getMiddleName());
+      assertEquals("Utibe", userService.findUserById(1L).getMiddleName());
     }
 
     @Test
     void testThatUserCanUpdateTheirNames(){
         UserRequest userRequest = new UserRequest(
-                1L,
+                2L,
                 "Newton",
                 "Norton",
                 "Cunningham",
@@ -62,7 +60,7 @@ class UserServiceImplTest {
         );
 
         UserRequest updateRequest = new UserRequest();
-        updateRequest.setId(1L);
+        updateRequest.setId(2L);
         updateRequest.setFirstName("Sam");
         updateRequest.setLastName("Norton");
         updateRequest.setEmail("eu123@gmail.com");
@@ -92,7 +90,7 @@ class UserServiceImplTest {
 
         userService.registerUser(userRequest);
 
-        userService.deleteUserById(1L);
+        userService.deleteUserById(2L);
     }
 
     @Test

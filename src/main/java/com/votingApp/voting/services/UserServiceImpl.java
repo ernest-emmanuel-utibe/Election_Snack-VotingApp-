@@ -17,10 +17,6 @@ import java.util.Optional;
 @Data
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-//    @Autowired
-//    public UserServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
 
     @Override
     public User registerUser(UserRequest userRequest) throws GlobalException {
