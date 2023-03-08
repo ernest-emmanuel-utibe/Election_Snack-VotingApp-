@@ -2,8 +2,6 @@ package com.votingApp.voting.controller;
 
 import com.votingApp.voting.data.dto.request.UserRequest;
 import com.votingApp.voting.data.dto.response.ApiResponse;
-import com.votingApp.voting.data.dto.response.UserResponse;
-import com.votingApp.voting.data.models.User;
 import com.votingApp.voting.exception.GlobalException;
 import com.votingApp.voting.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

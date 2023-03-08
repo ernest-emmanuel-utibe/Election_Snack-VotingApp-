@@ -21,7 +21,6 @@ class UserServiceImplTest {
     @BeforeEach
     public void setUp() {
         userRequest1 = new UserRequest();
-        userRequest1.setId(1);
         userRequest1.setFirstName("Ernest");
         userRequest1.setLastName("Emmanuel");
         userRequest1.setMiddleName("Utibe");

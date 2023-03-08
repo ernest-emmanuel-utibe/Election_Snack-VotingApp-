@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registerUser(UserRequest userRequest) throws GlobalException {
         User user = new User();
-        user.setUserId(userRequest.getId());
         user.setFirstName(userRequest.getFirstName());
         user.setMiddleName(userRequest.getMiddleName());
         user.setLastName(userRequest.getLastName());
@@ -46,7 +45,6 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findById(updatedUser.getId());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            user.setUserId(updatedUser.getId());
             user.setFirstName(updatedUser.getFirstName());
             user.setMiddleName(updatedUser.getMiddleName());
             user.setLastName(updatedUser.getLastName());
