@@ -8,15 +8,18 @@ import com.votingApp.voting.data.repositories.UserRepository;
 import com.votingApp.voting.exception.GlobalException;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Data
 @AllArgsConstructor
-@ToString
+//@ToString
 @Slf4j
 public class CandidateServiceImpl implements CandidateService {
+
     private final CandidateRepository candidateRepository;
+//    @Autowired
     private final UserRepository userRepository;
 
     @Override
@@ -38,7 +41,7 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public void castVote(CandidateRequest candidateRequest) {
        Candidate candidate = new Candidate();
-       candidate.setUserId(candidate.getUserId());
+       candidate.setCandidateName(candidateRequest.getCandidateName());
        candidate.setParty(candidateRequest.getParty());
        candidate.setTypeOfElection(candidateRequest.getTypeOfElection());
        candidate.setLocalDateTime(candidateRequest.getLocalDateTime());

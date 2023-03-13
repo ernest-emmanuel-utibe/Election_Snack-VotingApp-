@@ -2,6 +2,7 @@ package com.votingApp.voting.services;
 
 import com.votingApp.voting.data.dto.request.UserRequest;
 
+import com.votingApp.voting.data.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,13 @@ class UserServiceImplTest {
 
     UserRequest userRequest1;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @BeforeEach
     public void setUp() {
         userRequest1 = new UserRequest();
+        userRequest1.setId(1L);
         userRequest1.setFirstName("Ernest");
         userRequest1.setLastName("Emmanuel");
         userRequest1.setMiddleName("Utibe");
@@ -47,7 +52,7 @@ class UserServiceImplTest {
     @Test
     void testThatUserCanUpdateTheirNames(){
         UserRequest userRequest = new UserRequest(
-                2L,
+                1L,
                 "Newton",
                 "Norton",
                 "Cunningham",
@@ -59,14 +64,14 @@ class UserServiceImplTest {
         );
 
         UserRequest updateRequest = new UserRequest();
-        updateRequest.setId(2L);
+        updateRequest.setId(1L);
         updateRequest.setFirstName("Sam");
         updateRequest.setLastName("Norton");
-        updateRequest.setEmail("eu123@gmail.com");
         updateRequest.setMiddleName("Cunningham");
+        updateRequest.setEmail("eu123@gmail.com");
         updateRequest.setState("New York State");
         updateRequest.setGender(MALE);
-        updateRequest.setNationalIdentificationNumber(8748648827386238864L);
+        updateRequest.setNationalIdentificationNumber(638399935794087L);
 
         userService.registerUser(userRequest);
 
@@ -86,10 +91,11 @@ class UserServiceImplTest {
                 MALE,
                 638399935794087L
         );
-
         userService.registerUser(userRequest);
 
-        userService.deleteUserById(2L);
+        userRepository.deleteById(1L);
+
+        assertEquals(0, userRepository.findAll().size());
     }
 
     @Test

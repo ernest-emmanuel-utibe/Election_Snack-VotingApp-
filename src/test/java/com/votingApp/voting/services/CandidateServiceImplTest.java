@@ -2,6 +2,7 @@ package com.votingApp.voting.services;
 
 import com.votingApp.voting.data.dto.request.CandidateRequest;
 import com.votingApp.voting.data.dto.response.Response;
+import com.votingApp.voting.data.repositories.CandidateRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ class CandidateServiceImplTest {
 
     private CandidateRequest candidateRequest;
 
+    @Autowired
+    private CandidateRepository candidateRepository;
+
     @BeforeEach
     void setUp() {}
 
@@ -33,40 +37,46 @@ class CandidateServiceImplTest {
         candidateRequest.setCandidateName("Peter Obi");
         candidateRequest.setLocalDateTime(LocalDateTime.now());
         Response response = candidateService.voterRegistration(candidateRequest);
-        assertEquals("Candidate successfully registered",  response.getMessage());
+        assertEquals("Voter successfully registered",  response.getMessage());
     }
 
     @Test
     void castVote() {
         candidateRequest = new CandidateRequest();
-        candidateRequest.setUserId(1);
         candidateRequest.setName("John Maxwell");
-        candidateRequest.setCandidateName("Peter Obi Chukwu");
+        candidateRequest.setCandidateName("Peter Obi");
         candidateRequest.setParty(LP);
         candidateRequest.setTypeOfElection("Presidential");
         candidateRequest.setVoterId(75847366474735347L);
         candidateService.castVote(candidateRequest);
-        assertTrue(true);
+
+        assertEquals("Peter Obi", candidateRepository.findById(1L).get().getCandidateName());
     }
 
     @Test
     void testThatVotesCanBeFoundById() {
-//        candidateRequest.setUserId(1);
+        candidateRequest = new CandidateRequest();
         candidateRequest.setName("John Maxwell");
-        candidateRequest.setCandidateName("Peter Obi Chukwu");
+        candidateRequest.setCandidateName("Peter Obi");
         candidateRequest.setParty(LP);
         candidateRequest.setTypeOfElection("Presidential");
         candidateRequest.setVoterId(75847366474735347L);
+        candidateService.castVote(candidateRequest);
 
-        candidateService.findVotesById(1L);
-
-        assertEquals(1, candidateService.findVotesById(1L));
+        assertEquals("Peter Obi", candidateRepository.findById(1L).get().getCandidateName());
     }
 
     @Test
     void testThatVotesCanBeDeletedById() {
-        candidateService.deleteVotesById(1L);
-        assertEquals(0, 0);
+        candidateRequest = new CandidateRequest();
+        candidateRequest.setName("John Maxwell");
+        candidateRequest.setCandidateName("Peter Obi");
+        candidateRequest.setParty(LP);
+        candidateRequest.setTypeOfElection("Presidential");
+        candidateRequest.setVoterId(75847366474735347L);
+        candidateService.castVote(candidateRequest);
+        candidateRepository.deleteById(1L);
+        assertEquals(0, candidateRepository.findAll().size());
     }
 
 

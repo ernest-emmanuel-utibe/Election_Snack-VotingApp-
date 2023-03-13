@@ -11,7 +11,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-//@Entity
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

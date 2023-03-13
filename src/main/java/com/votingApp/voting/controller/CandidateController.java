@@ -4,13 +4,13 @@ import com.votingApp.voting.data.dto.request.CandidateRequest;
 import com.votingApp.voting.data.dto.response.ApiResponse;
 import com.votingApp.voting.exception.GlobalException;
 import com.votingApp.voting.services.CandidateService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/voting")
-public class VoterController {
-//    @Autowired
+public class CandidateController {
     private CandidateService candidateService;
     @PostMapping("/register")
     public ResponseEntity<?> votersRegister(@RequestBody CandidateRequest request)  {
@@ -30,6 +30,12 @@ public class VoterController {
     public ResponseEntity<?> voterCastVote(CandidateRequest request) {
         candidateService.castVote(request);
         return (ResponseEntity<?>) candidateService;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteVoteById(@PathVariable("id") Long id) {
+        candidateService.deleteVotesById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
