@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Data
 @AllArgsConstructor
@@ -47,6 +49,11 @@ public class CandidateServiceImpl implements CandidateService {
        candidate.setLocalDateTime(candidateRequest.getLocalDateTime());
        candidateRepository.save(candidate);
        candidateRepository.count();
+    }
+
+    @Override
+    public List<Candidate> getAllCandidates() {
+        return candidateRepository.findAll();
     }
 
     @Override

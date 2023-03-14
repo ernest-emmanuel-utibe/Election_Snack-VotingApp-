@@ -2,14 +2,17 @@ package com.votingApp.voting.controller;
 
 import com.votingApp.voting.data.dto.request.CandidateRequest;
 import com.votingApp.voting.data.dto.response.ApiResponse;
+import com.votingApp.voting.data.models.Candidate;
 import com.votingApp.voting.exception.GlobalException;
 import com.votingApp.voting.services.CandidateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/voting")
+@RequestMapping("api/v3/candidate")
 public class CandidateController {
     private CandidateService candidateService;
     @PostMapping("/register")
@@ -30,6 +33,11 @@ public class CandidateController {
     public ResponseEntity<?> voterCastVote(CandidateRequest request) {
         candidateService.castVote(request);
         return (ResponseEntity<?>) candidateService;
+    }
+
+    @GetMapping
+    public List<Candidate> getAllCandidates() {
+        return candidateService.getAllCandidates();
     }
 
     @DeleteMapping("/{id}")
