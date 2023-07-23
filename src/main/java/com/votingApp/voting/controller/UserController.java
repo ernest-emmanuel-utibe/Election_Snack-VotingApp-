@@ -49,13 +49,4 @@ public class UserController {
         userService.deleteUserById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    //    @PostMapping("api/v1/castVote")
-//    public String castVote(@RequestBody UserRequest userRequest){
-//
-//    }
-
-
-
-
 }
