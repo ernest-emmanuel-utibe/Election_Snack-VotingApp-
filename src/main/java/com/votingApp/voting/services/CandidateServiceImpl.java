@@ -21,13 +21,12 @@ import java.util.List;
 public class CandidateServiceImpl implements CandidateService {
 
     private final CandidateRepository candidateRepository;
-//    @Autowired
+
     private final UserRepository userRepository;
 
     @Override
     public Response voterRegistration(CandidateRequest candidateRequest) throws GlobalException {
         Candidate candidate = new Candidate();
-//        voterRegistration.setUserId(voterRegistrationRequest.getUserId());
         candidate.setVoterId(candidateRequest.getVoterId());
         candidate.setCandidateName(candidateRequest.getCandidateName());
         candidate.setTypeOfElection(candidateRequest.getTypeOfElection());
